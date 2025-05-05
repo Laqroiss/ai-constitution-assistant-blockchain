@@ -1,0 +1,42 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Streamlit cache
+.streamlit/
+
+# Jupyter Notebook checkpoints (if ever added)
+.ipynb_checkpoints/
+
+# MacOS / Windows system files
+.DS_Store
+Thumbs.db
+
+# Python env and log files
+*.log
+*.pot
+*.pyc
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Dotenv config
+.env
+
+# ChromaDB persistence
+chroma_db/
+
+# Uploaded files (optional, if storing temp uploads)
+temp_uploads/
+*.tmp
+
