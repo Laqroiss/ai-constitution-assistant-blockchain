@@ -1,65 +1,83 @@
-# 🇰🇿 Constitution AI Assistant
+# 🇰🇿 Kazakhstan Constitution AI Assistant (On-Chain)
 
-An AI-powered assistant that answers questions about the Constitution of the Republic of Kazakhstan and other uploaded legal documents using LLM + vector search (RAG).
-
----
-
-## ✅ Features
-
-- ✅ Upload multiple documents (PDF or TXT)
-- ✅ Ask natural-language questions
-- ✅ Uses OpenAI LLM with ChromaDB as a vector store
-- ✅ Automatically splits, embeds, and indexes document chunks
-- ✅ Context-aware answers from uploaded content
-- ✅ Built with Streamlit (UI), LangChain (pipeline), and dotenv (for secrets)
+This project is a decentralized AI Assistant that can answer questions about the **Constitution of the Republic of Kazakhstan** using vectors stored **directly on the blockchain**. It combines OpenAI's embeddings, smart contracts written in Solidity, and a Streamlit interface.
 
 ---
 
-## 📦 Setup Instructions
+## 🚀 Usage
 
-### 1. Clone the repository (or unzip folder)
+### 1. Start Ganache
+Run a local Ethereum blockchain using:
 ```bash
-git clone https://github.com/your-username/ai-constitution-assistant.git
-cd ai-constitution-assistant
+ganache
 ```
 
-### 2. Install dependencies
+### 2. Deploy Smart Contract
+- Open [Remix IDE](https://remix.ethereum.org)
+- Paste and compile `VectorStore.sol`
+- Deploy to `http://127.0.0.1:8545` (Custom HTTP Provider)
+- Copy the deployed contract address
+
+### 3. Update `.env`
+```env
+CONTRACT_ADDRESS=0xYourDeployedContractAddress
+OPENAI_API_KEY=your-openai-api-key
+```
+
+### 4. Run Streamlit App
 ```bash
-pip install -r requirements.txt
-```
-
-### 3. Set your OpenAI API Key
-Create a `.env` file in the root directory:
-
-```
-OPENAI_API_KEY=your_openai_key_here
-```
-
-Or rename `.env.example` to `.env`.
-
-### 4. Run the app
-```bash
-python -m streamlit run main.py
+streamlit run main.py
 ```
 
 ---
 
-## 🖼️ Screenshots
+## 📄 Features
 
-### Uploading documents
-![Upload](screenshots/image1.png)
-
-### Answering a question
-![Response](screenshots/image2.png)
+- Upload a PDF of the Constitution
+- Split into chunks using LangChain
+- Generate OpenAI embeddings for each chunk
+- Store all vectors **on-chain**
+- Query the assistant: your question is embedded, compared to stored vectors, and answered by OpenAI using the best matching chunk(s)
 
 ---
 
-## 🧪 Example Usage
+## 📸 Screenshots
 
-Upload the official [Constitution of Kazakhstan (EN)](https://www.akorda.kz/en/constitution-of-the-republic-of-kazakhstan-50912) and ask:
+| Upload Document | Ask a Question | Remix Vector Check |
+|-----------------|----------------|---------------------|
+| ![upload](screenshots/upload.png) | ![question](screenshots/query.png) | ![remix](screenshots/remix_getVector.png) |
 
-> *"What are the fundamental rights of citizens?"*  
-> *"What is the term length of the President?"*
+---
+
+## 💬 Example
+
+**Prompt:**  
+> Who is the Supreme Commander of the Armed Forces?
+
+**AI Response:**  
+> The President of the Republic of Kazakhstan is the Supreme Commander-in-Chief of the Armed Forces, as stated in Article 44 of the Constitution.
+
+---
+
+## 🧠 Architecture
+
+| Layer           | Tool               |
+|----------------|--------------------|
+| Smart Contract  | Solidity (VectorStore) |
+| Blockchain      | Ganache (Local Ethereum) |
+| Off-chain App   | Python (Streamlit + Web3.py) |
+| Embeddings      | OpenAI (`text-embedding-ada-002`) |
+| Document Parser | LangChain PDF Loader |
+| Answering Model | OpenAI GPT-3.5 via LangChain |
+
+---
+
+## 🧪 Examples for Testing
+
+- Who is the Supreme Commander of the Armed Forces?
+- What are the powers of the President?
+- How is citizenship defined?
+- What does Article 7 state?
 
 ---
 
@@ -69,8 +87,19 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🔗 References
+## 📎 Project Structure
 
-- [LangChain Documentation](https://python.langchain.com/)
-- [Streamlit File Uploader Docs](https://docs.streamlit.io/develop/api-reference/widgets/st.file_uploader)
-- [ChromaDB + RAG Setup Guide](https://medium.com/@arunpatidar26/rag-chromadb-ollama-python-guide-for-beginners-30857499d0a0)
+```
+├── main.py               # Main Streamlit app
+├── send_vector.py        # Optional testing script
+├── config.py             # Contains contract ABI
+├── contracts/
+│   └── VectorStore.sol   # Solidity smart contract
+├── screenshots/          # Demo images
+│   ├── upload.png
+│   ├── query.png
+│   └── remix_getVector.png
+├── .env                  # Contract address & API key
+├── LICENSE
+└── README.md
+```

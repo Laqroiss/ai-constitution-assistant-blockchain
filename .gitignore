@@ -1,42 +1,22 @@
-# Byte-compiled / cache
+# Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.so
+*.egg-info/
+*.pkl
 
-# Virtual environment
-venv/
-env/
-.venv/
-ENV/
+# Environment
+.env
 
-# Streamlit cache
+# Streamlit
 .streamlit/
 
-# Jupyter Notebook checkpoints (if ever added)
+# Jupyter / VSCode
 .ipynb_checkpoints/
+.vscode/
 
-# MacOS / Windows system files
+# OS
 .DS_Store
 Thumbs.db
 
-# Python env and log files
+# Misc
 *.log
-*.pot
-*.pyc
-
-# IDE / Editor
-.vscode/
-.idea/
-
-# Dotenv config
-.env
-
-# ChromaDB persistence
-chroma_db/
-
-# Uploaded files (optional, if storing temp uploads)
-temp_uploads/
-*.tmp
-
